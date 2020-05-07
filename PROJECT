@@ -1,0 +1,7 @@
+domain: icks.inspur.com
+repo: github.com/packyzbq/ControllerScaffold
+resources:
+- group: release
+  kind: GrayRelease
+  version: v1
+version: "2"

@@ -1,0 +1,20 @@
+# permissions for end users to view grayreleases.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: grayrelease-viewer-role
+rules:
+- apiGroups:
+  - release.icks.inspur.com
+  resources:
+  - grayreleases
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - release.icks.inspur.com
+  resources:
+  - grayreleases/status
+  verbs:
+  - get

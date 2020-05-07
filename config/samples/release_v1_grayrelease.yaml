@@ -1,0 +1,7 @@
+apiVersion: release.icks.inspur.com/v1
+kind: GrayRelease
+metadata:
+  name: grayrelease-sample
+spec:
+  # Add fields here
+  foo: bar
