@@ -26,6 +26,7 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
+	grayreleasev1 "github.com/packyzbq/ControllerScaffold/api/v1"
 	releasev1 "github.com/packyzbq/ControllerScaffold/api/v1"
 	"github.com/packyzbq/ControllerScaffold/controllers"
 	// +kubebuilder:scaffold:imports
@@ -40,6 +41,7 @@ func init() {
 	_ = clientgoscheme.AddToScheme(scheme)
 
 	_ = releasev1.AddToScheme(scheme)
+	_ = grayreleasev1.AddToScheme(scheme)
 	// +kubebuilder:scaffold:scheme
 }
 
@@ -72,6 +74,10 @@ func main() {
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "GrayRelease")
+		os.Exit(1)
+	}
+	if err = (&grayreleasev1.GrayRelease{}).SetupWebhookWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create webhook", "webhook", "GrayRelease")
 		os.Exit(1)
 	}
 	// +kubebuilder:scaffold:builder
